@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Калькулятор стоимости дата-центра | ЦОД ЭКСПЕРТ</title>
+<meta name="description" content="Предварительный расчёт капитальных затрат, эксплуатации и срока окупаемости дата-центра по мощности, уровню надёжности и региону.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Калькулятор стоимости дата-центра">
+<meta property="og:description" content="CAPEX, структура затрат, эксплуатация и срок окупаемости — предварительный расчёт за минуту.">
+<meta property="og:locale" content="ru_RU">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..600;1,14..32,300..600&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A4F68'/%3E%3Crect x='7' y='9' width='18' height='4' rx='1' fill='white'/%3E%3Crect x='7' y='15' width='18' height='4' rx='1' fill='white' opacity='.6'/%3E%3Crect x='7' y='21' width='18' height='4' rx='1' fill='white' opacity='.3'/%3E%3C/svg%3E">
+<style>
+:root{
+  --blue-dark:#161D23; --blue:#232D35; --blue-button:#246279;
+  --blue-bright:#0A4F68; --blue-bright-light:#0d6585;
+  --blue-gray:rgba(115,167,186,.25);
+  --gray:#F3F6F6; --gray-light:#F5F8F9; --white:#FFFFFF;
+  --red:#F01453; --accent-red:#EF4444;
+  --white-8:rgba(255,255,255,.08); --white-16:rgba(255,255,255,.16);
+  --white-45:rgba(255,255,255,.45); --white-65:rgba(255,255,255,.65);
+  --white-72:rgba(255,255,255,.72); --white-88:rgba(255,255,255,.88);
+  --text-primary:rgba(0,0,0,.99); --text-secondary:rgba(0,0,0,.72);
+  --text-tertiary:rgba(0,0,0,.48); --text-light:rgba(0,0,0,.56);
+  --text-primary-inverse:#fff; --text-secondary-inverse:var(--white-88);
+  --text-tertiary-inverse:var(--white-72);
+  --border-primary:rgba(0,0,0,.24); --border-primary-inverse:var(--white-45);
+  --border-radius:8px; --border-radius-lg:12px;
+  --ff-base:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --fs-h1:36px; --lh-h1:1.16; --fs-h2:24px; --fs-h4:20px;
+  --container-padding:20px;
+}
+@media(min-width:1024px){:root{--fs-h1:48px; --fs-h2:32px; --container-padding:32px}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--ff-base);font-size:16px;line-height:1.6;color:var(--text-primary);background:var(--white);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+[hidden]{display:none!important}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--blue-bright);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.wrap{max-width:1360px;margin:0 auto;padding:0 var(--container-padding)}
+h1,h2,h3,p{margin:0}
+.h1{font-size:var(--fs-h1);line-height:var(--lh-h1);font-weight:500;letter-spacing:-.01em}
+.h2{font-size:var(--fs-h2);line-height:1.2;font-weight:500;letter-spacing:-.01em}
+.h4{font-size:var(--fs-h4);line-height:1.3;font-weight:500}
+.lead{font-size:18px;line-height:1.55;color:var(--text-secondary)}
+
+.primary-btn{display:inline-block;font-family:inherit;font-size:16px;line-height:1.5;font-weight:400;padding:15px 32px;border:0;border-radius:var(--border-radius);background-color:var(--blue-bright);color:#fff;transition:background-color .25s;text-decoration:none;cursor:pointer}
+.primary-btn:hover{background-color:var(--blue-bright-light)}
+.secondary-btn{display:inline-block;font-family:inherit;font-size:16px;line-height:1.5;padding:15px 32px;border-radius:var(--border-radius);border:1px solid var(--border-primary);background:transparent;color:var(--text-secondary);text-decoration:none;cursor:pointer;transition:border-color .25s}
+.secondary-btn:hover{border-color:var(--blue-bright)}
+
+/* ---------- Шапка ---------- */
+.hdr{border-bottom:1px solid rgba(0,0,0,.08);background:#fff;position:relative;z-index:5}
+.hdr-in{display:flex;align-items:center;gap:24px;height:76px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;flex:0 0 auto}
+.logo-mark{width:36px;height:36px;border-radius:7px;background:var(--blue-bright);display:flex;flex-direction:column;justify-content:center;gap:3px;padding:8px}
+.logo-mark i{display:block;height:3px;border-radius:1px;background:#fff}
+.logo-mark i:nth-child(2){opacity:.6}
+.logo-mark i:nth-child(3){opacity:.32}
+.logo-txt b{display:block;font-weight:600;font-size:15px;letter-spacing:.04em;line-height:1.1}
+.logo-txt span{display:block;font-size:11.5px;color:var(--text-tertiary);letter-spacing:.06em}
+.chip-proto{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-bright);background:var(--blue-gray);padding:4px 9px;border-radius:4px;flex:0 0 auto}
+.nav{display:none;gap:26px;margin-left:12px;flex:1}
+.nav a{font-size:15px;color:var(--text-secondary);text-decoration:none;transition:color .2s}
+.nav a:hover{color:var(--blue-bright)}
+.hdr-r{display:flex;align-items:center;gap:20px;margin-left:auto;flex:0 0 auto}
+.hdr-tel{display:none;font-size:16px;font-weight:500;text-decoration:none;white-space:nowrap}
+.hdr .primary-btn{padding:11px 22px;font-size:15px}
+@media(min-width:1024px){.nav{display:flex}.hdr-tel{display:block}}
+
+/* ---------- Первый экран ---------- */
+.hero{position:relative;background:var(--blue-dark);color:#fff;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background-image:url("img/hero.webp");background-size:cover;background-position:center;opacity:.42}
+.hero-veil{position:absolute;inset:0;background:linear-gradient(90deg,var(--blue-dark) 0%,rgba(22,29,35,.92) 42%,rgba(22,29,35,.55) 100%)}
+.hero-in{position:relative;padding:64px 0 56px}
+@media(min-width:1024px){.hero-in{padding:96px 0 88px}}
+.hero h1{max-width:16ch;color:#fff}
+.hero .lead{color:var(--text-secondary-inverse);max-width:56ch;margin-top:20px}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--white-16);border:1px solid var(--white-16);border-radius:var(--border-radius-lg);overflow:hidden;margin-top:44px;max-width:720px}
+.hero-stat{background:rgba(22,29,35,.72);padding:20px}
+.hero-stat b{display:block;font-size:22px;font-weight:500;line-height:1.2}
+.hero-stat span{display:block;font-size:13.5px;color:var(--text-tertiary-inverse);margin-top:6px;line-height:1.35}
+@media(max-width:599px){.hero-stats{grid-template-columns:1fr}.hero-stat{padding:16px 18px}}
+
+/* ---------- Калькулятор ---------- */
+.calc-sec{background:var(--gray-light);padding:56px 0}
+@media(min-width:1024px){.calc-sec{padding:88px 0}}
+.sec-head{max-width:60ch;margin-bottom:36px}
+.sec-head .lead{margin-top:16px}
+.calc{display:grid;gap:20px}
+@media(min-width:1024px){.calc{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:24px;align-items:start}}
+.panel{background:#fff;border-radius:var(--border-radius-lg);padding:28px 24px}
+@media(min-width:1024px){.panel{padding:40px}}
+.panel-t{font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:26px}
+
+.field{margin-bottom:28px}
+.field:last-child{margin-bottom:0}
+.label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-weight:500;line-height:1.5;margin-bottom:12px}
+.label em{font-style:normal;font-weight:500;color:var(--blue-bright);white-space:nowrap}
+.hint{font-size:13.5px;line-height:1.45;color:var(--text-tertiary);margin-top:10px}
+input[type=range]{width:100%;height:22px;accent-color:var(--blue-bright);cursor:pointer}
+select,input[type=text],input[type=tel],input[type=email]{width:100%;height:48px;border-radius:var(--border-radius);padding:0 20px;border:1px solid var(--border-primary);background:transparent;font-family:inherit;font-size:16px;color:var(--text-primary);transition:border-color .25s;appearance:none}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23000' stroke-opacity='.48' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center;padding-right:44px}
+select:hover,input:hover{border-color:rgba(0,0,0,.4)}
+select:focus,input:focus{border-color:var(--blue-bright);outline:none}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1px solid var(--border-primary);border-radius:var(--border-radius);overflow:hidden}
+.seg button{font-family:inherit;font-size:14.5px;line-height:1.3;padding:13px 10px;border:0;border-right:1px solid var(--border-primary);background:transparent;color:var(--text-secondary);cursor:pointer;transition:background-color .2s,color .2s}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--blue-bright);color:#fff;font-weight:500}
+@media(max-width:599px){.seg{grid-auto-flow:row;grid-auto-columns:auto}.seg button{border-right:0;border-bottom:1px solid var(--border-primary)}.seg button:last-child{border-bottom:0}}
+
+/* результат */
+.res{background:var(--blue-dark);color:#fff;border-radius:var(--border-radius-lg);overflow:hidden}
+.res-top{padding:28px 24px}
+@media(min-width:1024px){.res-top{padding:40px}}
+.res-lab{font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-tertiary-inverse)}
+.res-big{font-size:38px;line-height:1.1;font-weight:500;letter-spacing:-.02em;margin-top:14px;font-variant-numeric:tabular-nums}
+@media(min-width:1024px){.res-big{font-size:52px}}
+.res-sub{font-size:14.5px;color:var(--text-tertiary-inverse);margin-top:10px}
+.res-kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--white-16);border-top:1px solid var(--white-16)}
+@media(min-width:600px){.res-kpis{grid-template-columns:repeat(4,1fr)}}
+.res-kpi{background:var(--blue-dark);padding:18px 20px}
+.res-kpi b{display:block;font-size:20px;font-weight:500;line-height:1.2;font-variant-numeric:tabular-nums}
+.res-kpi span{display:block;font-size:12.5px;color:var(--text-tertiary-inverse);margin-top:5px;line-height:1.3}
+
+.split{padding:26px 24px 28px;background:#fff}
+@media(min-width:1024px){.split{padding:32px 40px 40px}}
+.split-t{font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:20px}
+.srow{display:grid;grid-template-columns:1fr auto;gap:6px 16px;align-items:center;margin-bottom:14px}
+.srow:last-child{margin-bottom:0}
+.srow-n{font-size:14.5px;color:var(--text-secondary);line-height:1.35}
+.srow-v{font-size:14.5px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
+.srow-bar{grid-column:1/-1;height:6px;border-radius:3px;background:var(--gray)}
+.srow-bar i{display:block;height:100%;border-radius:3px;background:var(--blue-bright)}
+.disclaim{font-size:13.5px;line-height:1.5;color:var(--text-tertiary);margin-top:26px;padding-top:20px;border-top:1px solid rgba(0,0,0,.08)}
+
+/* ---------- Что учтено ---------- */
+.incl{padding:56px 0}
+@media(min-width:1024px){.incl{padding:88px 0}}
+.incl-grid{display:grid;gap:20px;margin-top:36px}
+@media(min-width:600px){.incl-grid{grid-template-columns:repeat(3,1fr)}}
+.icard{background:var(--gray);border-radius:var(--border-radius-lg);padding:32px 28px}
+.icard-n{font-size:13px;font-weight:500;letter-spacing:.1em;color:var(--blue-bright);margin-bottom:14px}
+.icard p{font-size:15px;line-height:1.55;color:var(--text-secondary);margin-top:10px}
+.figure{margin-top:44px;border-radius:var(--border-radius-lg);overflow:hidden;position:relative}
+.figure img{width:100%;height:auto;aspect-ratio:21/8;object-fit:cover}
+.figure figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 26px;color:#fff;font-size:14px;line-height:1.45;background:linear-gradient(to top,rgba(22,29,35,.92),rgba(22,29,35,0))}
+
+/* ---------- Заявка ---------- */
+.cta{background:var(--blue-dark);color:#fff;padding:56px 0}
+@media(min-width:1024px){.cta{padding:88px 0}}
+.cta-grid{display:grid;gap:36px}
+@media(min-width:1024px){.cta-grid{grid-template-columns:1fr 1.1fr;gap:64px;align-items:start}}
+.cta h2{color:#fff}
+.cta .lead{color:var(--text-secondary-inverse);margin-top:18px}
+.cta-contacts{margin-top:32px;display:grid;gap:14px}
+.cc{display:flex;gap:12px;font-size:15px;color:var(--text-tertiary-inverse)}
+.cc b{color:#fff;font-weight:500}
+.form-grid{display:grid;gap:18px}
+@media(min-width:600px){.form-grid{grid-template-columns:1fr 1fr}}
+.form-grid .full{grid-column:1/-1}
+.cta .label{color:#fff}
+.cta input[type=text],.cta input[type=tel],.cta input[type=email]{border-color:var(--border-primary-inverse);color:#fff}
+.cta input::placeholder{color:var(--white-45)}
+.cta input:hover{border-color:var(--white-72)}
+.cta input:focus{border-color:#fff}
+.agree{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;line-height:1.45;color:var(--text-tertiary-inverse);cursor:pointer}
+.agree input{width:20px;height:20px;flex:0 0 20px;margin:1px 0 0;accent-color:var(--blue-bright);cursor:pointer}
+.cta .primary-btn{background:#fff;color:var(--blue-dark);font-weight:500}
+.cta .primary-btn:hover{background:var(--white-88)}
+.form-note{font-size:13px;color:var(--white-45);margin-top:4px}
+
+/* ---------- Подвал ---------- */
+.ftr{background:var(--blue);color:var(--text-tertiary-inverse);padding:40px 0;font-size:14px}
+.ftr-in{display:flex;flex-wrap:wrap;gap:20px 40px;justify-content:space-between;align-items:flex-start}
+.ftr a{color:var(--white-88);text-decoration:none}
+.ftr a:hover{text-decoration:underline}
+.ftr-note{font-size:13px;line-height:1.5;max-width:52ch;color:var(--white-45);border-top:1px solid var(--white-16);margin-top:28px;padding-top:20px;width:100%}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="logo" href="#">
+      <span class="logo-mark"><i></i><i></i><i></i></span>
+      <span class="logo-txt"><b>ЦОД ЭКСПЕРТ</b><span>uptime.ru</span></span>
+    </a>
+    <span class="chip-proto">Прототип</span>
+    <nav class="nav">
+      <a href="#calc">Калькулятор</a>
+      <a href="#included">Что учтено</a>
+      <a href="#request">Контакты</a>
+    </nav>
+    <div class="hdr-r">
+      <a class="hdr-tel" href="tel:+74951209070">+7 (495) 120-90-70</a>
+      <a class="primary-btn" href="#request">Обсудить проект</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-veil"></div>
+  <div class="wrap hero-in">
+    <h1 class="h1">Калькулятор стоимости дата-центра</h1>
+    <p class="lead">Предварительная оценка капитальных затрат, эксплуатации и срока окупаемости по мощности, уровню надёжности и площадке. Расчёт занимает минуту и не требует контактов.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><b>7 статей</b><span>структура капитальных затрат</span></div>
+      <div class="hero-stat"><b>Tier II–III</b><span>с сертификацией Uptime Institute</span></div>
+      <div class="hero-stat"><b>5 площадок</b><span>Москва, область, СПб, Екатеринбург</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="calc-sec" id="calc">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h2">Параметры проекта</h2>
+      <p class="lead">Задайте мощность и условия площадки — расчёт пересчитывается сразу, без кнопки.</p>
+    </div>
+
+    <div class="calc">
+      <div class="panel">
+        <div class="panel-t">Исходные данные</div>
+
+        <div class="field">
+          <label class="label" for="mw">Мощность IT-нагрузки <em id="mw-v">2 МВт</em></label>
+          <input type="range" id="mw" min="0.25" max="20" step="0.25" value="2">
+          <div class="hint">Полезная мощность оборудования заказчика без учёта охлаждения и потерь.</div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="kw">Мощность на стойку <em id="kw-v">5 кВт</em></label>
+          <input type="range" id="kw" min="3" max="20" step="0.5" value="5">
+          <div class="hint">Классическое размещение — 5 кВт. Под нагрузки искусственного интеллекта закладывают 15–20 кВт и жидкостное охлаждение.</div>
+        </div>
+
+        <div class="field">
+          <span class="label">Уровень надёжности</span>
+          <div class="seg" id="tier">
+            <button type="button" data-k="t2" aria-pressed="false">Tier II</button>
+            <button type="button" data-k="t3" aria-pressed="true">Tier III</button>
+            <button type="button" data-k="t3c" aria-pressed="false">Tier III + сертификат</button>
+          </div>
+          <div class="hint" id="tier-hint"></div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="reg">Площадка</label>
+          <select id="reg">
+            <option value="msk">Москва</option>
+            <option value="mo">Московская область</option>
+            <option value="spb">Санкт-Петербург</option>
+            <option value="ekb">Екатеринбург</option>
+            <option value="oth">Другой регион</option>
+          </select>
+          <div class="hint" id="reg-hint"></div>
+        </div>
+
+        <div class="field">
+          <span class="label">Тип объекта</span>
+          <div class="seg" id="build">
+            <button type="button" data-k="new" aria-pressed="true">Новое строительство</button>
+            <button type="button" data-k="recon" aria-pressed="false">Реконструкция здания</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="res">
+          <div class="res-top">
+            <div class="res-lab">Капитальные затраты «под ключ»</div>
+            <div class="res-big" id="capex">—</div>
+            <div class="res-sub" id="perkw">—</div>
+          </div>
+          <div class="res-kpis">
+            <div class="res-kpi"><b id="racks">—</b><span>стоек</span></div>
+            <div class="res-kpi"><b id="pue">—</b><span>расчётный PUE</span></div>
+            <div class="res-kpi"><b id="opex">—</b><span>эксплуатация в год</span></div>
+            <div class="res-kpi"><b id="pb">—</b><span>окупаемость</span></div>
+          </div>
+          <div class="split">
+            <div class="split-t">Структура капитальных затрат</div>
+            <div id="split"></div>
+            <p class="disclaim">Расчёт предварительный, для оценки порядка величин. Срок окупаемости — простой, по EBITDA коммерческой модели, без учёта налогов, амортизации и стоимости финансирования. Точная финансовая модель разрабатывается под конкретный проект.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="incl" id="included">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h2">Что учтено в расчёте</h2>
+      <p class="lead">Калькулятор опирается на удельные показатели по мощности и уровню надёжности с поправками на регион и тип объекта.</p>
+    </div>
+    <div class="incl-grid">
+      <div class="icard">
+        <div class="icard-n">01</div>
+        <h3 class="h4">Инженерная инфраструктура</h3>
+        <p>Электроснабжение с источниками бесперебойного питания и дизель-генераторами, холодоснабжение, слаботочные системы, контроль доступа и видеонаблюдение.</p>
+      </div>
+      <div class="icard">
+        <div class="icard-n">02</div>
+        <h3 class="h4">Здание и подключение</h3>
+        <p>Строительно-монтажные работы или реконструкция существующего объекта, технологическое присоединение к электрическим сетям, проектирование и экспертиза.</p>
+      </div>
+      <div class="icard">
+        <div class="icard-n">03</div>
+        <h3 class="h4">Эксплуатация</h3>
+        <p>Электроэнергия по региональному тарифу с учётом коэффициента PUE и загрузки, персонал, сервисное обслуживание инженерных систем, налоги и охрана.</p>
+      </div>
+    </div>
+    <figure class="figure">
+      <img src="img/engine.webp" alt="Вид сверху на инженерную площадку дата-центра: ряды сухих градирен системы холодоснабжения и дизель-генераторные установки вдоль корпуса" loading="lazy" width="1600" height="610">
+      <figcaption>Холодоснабжение и резервное электропитание — половина капитальных затрат объекта. Удельные показатели считаются на полезную мощность IT-нагрузки, а не на общую подведённую мощность.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="cta" id="request">
+  <div class="wrap cta-grid">
+    <div>
+      <h2 class="h2">Нужен точный расчёт?</h2>
+      <p class="lead">Пришлём развёрнутую смету по статьям, модель эксплуатационных расходов и финансовую модель под параметры вашего проекта.</p>
+      <div class="cta-contacts">
+        <div class="cc"><span>Телефон</span><b>+7 (495) 120-90-70</b></div>
+        <div class="cc"><span>Почта</span><b>hello@uptime.ru</b></div>
+        <div class="cc"><span>Адрес</span><b>Москва, Электролитный проезд, 3с3</b></div>
+      </div>
+    </div>
+    <form class="form-grid" id="form">
+      <div>
+        <label class="label" for="f-name">Имя</label>
+        <input type="text" id="f-name" name="name" placeholder="Александр Иванов">
+      </div>
+      <div>
+        <label class="label" for="f-company">Компания</label>
+        <input type="text" id="f-company" name="company" placeholder="ООО «Технология»">
+      </div>
+      <div>
+        <label class="label" for="f-phone">Телефон</label>
+        <input type="tel" id="f-phone" name="phone" placeholder="+7 (910) 123-45-67">
+      </div>
+      <div>
+        <label class="label" for="f-email">Электронная почта</label>
+        <input type="email" id="f-email" name="email" placeholder="a.ivanov@company.ru">
+      </div>
+      <div class="full">
+        <label class="agree">
+          <input type="checkbox" name="agree" required>
+          <span>Я согласен на обработку персональных данных в соответствии с Политикой обработки данных</span>
+        </label>
+      </div>
+      <div class="full">
+        <button class="primary-btn" type="submit">Отправить заявку</button>
+        <p class="form-note">Форма в прототипе не отправляется — расчёт подставится в заявку автоматически.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="ftr">
+  <div class="wrap ftr-in">
+    <div>© ЦОД ЭКСПЕРТ — проектирование, строительство и управление центрами обработки данных</div>
+    <div><a href="tel:+74951209070">+7 (495) 120-90-70</a> · <a href="mailto:hello@uptime.ru">hello@uptime.ru</a></div>
+    <div class="ftr-note">Демонстрационный прототип калькулятора. Страница не является официальным сайтом компании и служит для согласования интерфейса и логики расчёта. Фотографии: первый экран — <a href="https://commons.wikimedia.org/wiki/File:BalticServers_data_center.jpg">BalticServers.com</a>, CC BY-SA 3.0; инженерная площадка — <a href="https://commons.wikimedia.org/wiki/File:Data_center_roof.jpg">Rsparks3</a>, CC0. Обе кадрированы.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+var BASE={t2:620000,t3:850000,t3c:950000};
+var PUE={t2:1.60,t3:1.45,t3c:1.40};
+var REG={
+  msk:{n:"Москва",              k:1.00, tar:7.4, rate:135000, pa:0.00},
+  mo: {n:"Московская область",  k:0.94, tar:6.9, rate:115000, pa:-0.01},
+  spb:{n:"Санкт-Петербург",     k:0.97, tar:7.0, rate:122000, pa:-0.03},
+  ekb:{n:"Екатеринбург",        k:0.89, tar:6.2, rate:98000,  pa:-0.04},
+  oth:{n:"Другой регион",       k:0.86, tar:5.9, rate:90000,  pa:-0.02}
+};
+var BUILD={"new":1.00,recon:0.83};
+var SHARE=[
+  ["Электроснабжение — ИБП, ДГУ, ГРЩ",0.31],
+  ["Холодоснабжение",0.21],
+  ["Здание и строительно-монтажные работы",0.19],
+  ["Технологическое присоединение",0.10],
+  ["Слаботочные системы, СКУД, пожарная сигнализация",0.07],
+  ["Проектирование, экспертиза, пусконаладка",0.07],
+  ["Резерв",0.05]
+];
+var TIERHINT={
+  t2:"Резервирование основных элементов, но обслуживание требует остановки. Плановая недоступность до 22 часов в год.",
+  t3:"Обслуживание без остановки нагрузки, все элементы резервируются. Рыночный стандарт коммерческого ЦОД — до 1,6 часа в год.",
+  t3c:"Тот же уровень, подтверждённый международным аудитом Uptime Institute. Условие для крупных корпоративных и государственных заказчиков."
+};
+
+function nf(n,d){return n.toLocaleString("ru-RU",{minimumFractionDigits:d||0,maximumFractionDigits:d||0});}
+function rub(n){
+  var a=Math.abs(n);
+  if(a>=1e9)return nf(n/1e9,2)+" млрд ₽";
+  if(a>=1e6)return nf(n/1e6,a<1e7?1:0)+" млн ₽";
+  return nf(Math.round(n/1e3)*1e3)+" ₽";
+}
+function short(n){
+  var a=Math.abs(n);
+  if(a>=1e9)return nf(n/1e9,2)+" млрд";
+  if(a>=1e6)return nf(n/1e6,a<1e7?1:0)+" млн";
+  return nf(Math.round(n/1e3))+" тыс.";
+}
+function yrs(v){
+  if(v===null)return "—";
+  var w=Math.floor(v),m=Math.round((v-w)*12);
+  if(m===12){w++;m=0;}
+  var word=(w%10===1&&w%100!==11)?"год":((w%10>=2&&w%10<=4&&(w%100<10||w%100>=20))?"года":"лет");
+  return w+" "+word+(m?" "+m+" мес.":"");
+}
+function $(id){return document.getElementById(id);}
+function segVal(el){var b=el.querySelector('[aria-pressed="true"]');return b?b.getAttribute("data-k"):null;}
+function seg(el,cb){
+  el.addEventListener("click",function(e){
+    var b=e.target.closest("button"); if(!b||!el.contains(b))return;
+    var all=el.querySelectorAll("button");
+    for(var i=0;i<all.length;i++)all[i].setAttribute("aria-pressed",all[i]===b?"true":"false");
+    cb();
+  });
+}
+
+function render(){
+  var mw=parseFloat($("mw").value), kwR=parseFloat($("kw").value);
+  var tier=segVal($("tier")), reg=$("reg").value, build=segVal($("build"));
+  $("mw-v").textContent=nf(mw,mw%1?2:0)+" МВт";
+  $("kw-v").textContent=nf(kwR,kwR%1?1:0)+" кВт";
+  $("tier-hint").textContent=TIERHINT[tier];
+  var rg=REG[reg];
+  $("reg-hint").textContent="Тариф "+nf(rg.tar,2)+" ₽ за кВт·ч, ставка "+nf(rg.rate)+" ₽ за стойку 5 кВт в месяц.";
+
+  var kw=mw*1000;
+  var capex=kw*BASE[tier]*rg.k*BUILD[build];
+  var pue=Math.max(1.25,PUE[tier]+rg.pa);
+  var racks=Math.round(kw/kwR);
+  var load=0.88;
+  var elec=kw*load*pue*8760*rg.tar;
+  var staff=(6+7*mw)*2100000;
+  var maint=capex*0.52*0.035;
+  var other=capex*0.018;
+  var opex=elec+staff+maint+other;
+  var rev=racks*load*(rg.rate*(kwR/5))*12*1.14;
+  var eb=rev-opex;
+
+  var ramp=[0.30,0.60,0.80], cum=0, pb=null;
+  for(var y=1;y<=15;y++){
+    var l=(y<=3)?ramp[y-1]:load;
+    var e=kw*l*pue*8760*rg.tar;
+    var o=e+staff+maint+other;
+    var r=racks*l*(rg.rate*(kwR/5))*12*1.14;
+    var v=r-o, prev=cum; cum+=v;
+    if(pb===null&&cum>=capex&&v>0){pb=y-1+(capex-prev)/v;break;}
+  }
+
+  $("capex").textContent=rub(capex);
+  $("perkw").textContent=nf(Math.round(capex/kw/1000)*1000)+" ₽ за кВт полезной мощности";
+  $("racks").textContent=nf(racks);
+  $("pue").textContent=nf(pue,2);
+  $("opex").textContent=short(opex)+" ₽";
+  $("pb").textContent=(eb>0&&pb)?yrs(pb):"—";
+
+  var h="";
+  for(var i=0;i<SHARE.length;i++){
+    h+='<div class="srow"><div class="srow-n">'+SHARE[i][0]+'</div>'+
+       '<div class="srow-v">'+short(capex*SHARE[i][1])+' ₽</div>'+
+       '<div class="srow-bar"><i style="width:'+(SHARE[i][1]/0.31*100).toFixed(1)+'%"></i></div></div>';
+  }
+  $("split").innerHTML=h;
+}
+
+$("mw").addEventListener("input",render);
+$("kw").addEventListener("input",render);
+$("reg").addEventListener("change",render);
+seg($("tier"),render);
+seg($("build"),render);
+$("form").addEventListener("submit",function(e){e.preventDefault();});
+render();
+})();
+</script>
+</body>
+</html>
