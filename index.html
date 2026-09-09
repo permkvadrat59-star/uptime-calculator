@@ -94,8 +94,6 @@ h1,h2,h3,p{margin:0}
 @media(min-width:1024px){.calc-sec{padding:88px 0}}
 .sec-head{max-width:60ch;margin-bottom:36px}
 .sec-head .lead{margin-top:16px}
-.calc{display:grid;gap:20px}
-@media(min-width:1024px){.calc{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:24px;align-items:start}}
 .panel{background:#fff;border-radius:var(--border-radius-lg);padding:28px 24px}
 @media(min-width:1024px){.panel{padding:40px}}
 .panel-t{font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:26px}
@@ -140,6 +138,72 @@ select:focus,input:focus{border-color:var(--blue-bright);outline:none}
 .srow-bar{grid-column:1/-1;height:6px;border-radius:3px;background:var(--gray)}
 .srow-bar i{display:block;height:100%;border-radius:3px;background:var(--blue-bright)}
 .disclaim{font-size:13.5px;line-height:1.5;color:var(--text-tertiary);margin-top:26px;padding-top:20px;border-top:1px solid rgba(0,0,0,.08)}
+
+/* ---------- Переключатель вариантов ---------- */
+.vtabs{display:grid;gap:12px;margin-bottom:24px}
+@media(min-width:768px){.vtabs{grid-template-columns:repeat(3,1fr)}}
+.vtab{display:block;width:100%;text-align:left;font-family:inherit;background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:var(--border-radius-lg);padding:18px 20px;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.vtab:hover{border-color:rgba(0,0,0,.3)}
+.vtab[aria-selected="true"]{border-color:var(--blue-bright);box-shadow:inset 0 0 0 1px var(--blue-bright)}
+.vtab-l{display:block;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-tertiary)}
+.vtab[aria-selected="true"] .vtab-l{color:var(--blue-bright)}
+.vtab-n{display:block;font-size:18px;font-weight:500;line-height:1.25;margin:6px 0 5px;color:var(--text-primary)}
+.vtab-d{display:block;font-size:13.5px;line-height:1.4;color:var(--text-secondary)}
+
+/* Вариант А — компактный блок */
+.quick{display:grid;gap:24px}
+@media(min-width:900px){.quick{grid-template-columns:repeat(3,1fr);gap:28px;align-items:start}}
+.quick .field{margin-bottom:0}
+.aline{margin-top:32px;background:var(--gray);border-radius:var(--border-radius-lg);padding:24px;display:grid;gap:22px}
+@media(min-width:900px){.aline{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:32px;align-items:center;padding:28px 32px}}
+.aline-big{font-size:30px;line-height:1.15;font-weight:500;letter-spacing:-.02em;color:var(--blue-bright);margin-top:10px;font-variant-numeric:tabular-nums}
+@media(min-width:1024px){.aline-big{font-size:36px}}
+.aline-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(0,0,0,.12);border:1px solid rgba(0,0,0,.12);border-radius:var(--border-radius);overflow:hidden}
+.aline-kpi{background:var(--gray);padding:14px 16px}
+.aline-kpi b{display:block;font-size:19px;font-weight:500;line-height:1.2;font-variant-numeric:tabular-nums}
+.aline-kpi span{display:block;font-size:12.5px;color:var(--text-tertiary);margin-top:4px;line-height:1.3}
+
+/* Вариант Б — шаги */
+.steps{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1px solid rgba(0,0,0,.12);border-radius:var(--border-radius);overflow:hidden;margin-bottom:30px}
+.step{padding:13px 14px;border-right:1px solid rgba(0,0,0,.12);min-width:0}
+.step:last-child{border-right:0}
+.step-n{font-size:11.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-tertiary)}
+.step-t{font-size:14px;color:var(--text-tertiary);margin-top:3px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.step.on{background:var(--blue-gray)}
+.step.on .step-n{color:var(--blue-bright)}
+.step.on .step-t{color:var(--text-primary);font-weight:500}
+.step.done .step-n::after{content:" ✓"}
+@media(max-width:767px){.steps{grid-auto-flow:row}.step{border-right:0;border-bottom:1px solid rgba(0,0,0,.12)}.step:last-child{border-bottom:0}.step-t{white-space:normal}}
+.wiz-nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:30px;padding-top:24px;border-top:1px solid rgba(0,0,0,.08)}
+.wiz-nav .secondary-btn,.wiz-nav .primary-btn{padding:13px 28px}
+
+/* Вариант В — панель */
+.lab{display:grid;gap:20px}
+@media(min-width:1024px){.lab{grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:24px;align-items:start}}
+.blk-t{font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-tertiary);margin:28px 0 16px}
+.chart{background:#fff;border-radius:var(--border-radius-lg);padding:24px}
+.chart svg{width:100%;height:auto;display:block}
+.cx-grid{stroke:rgba(0,0,0,.08);stroke-width:1}
+.cx-axis{stroke:rgba(0,0,0,.2);stroke-width:1}
+.cx-bar{fill:#C7D4D8}
+.cx-bar.on{fill:var(--blue-bright)}
+.cx-cap{stroke:var(--red);stroke-width:2;stroke-dasharray:5 4}
+.cx-t{fill:rgba(0,0,0,.48);font-size:10px}
+.cx-t.r{text-anchor:end}
+.cx-t.c{text-anchor:middle}
+.cx-lab{fill:var(--red);font-size:10px;font-weight:500}
+.chart-legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:16px;font-size:13px;color:var(--text-tertiary)}
+.chart-legend i{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:7px;vertical-align:-1px}
+.pnl-wrap{background:#fff;border-radius:var(--border-radius-lg);overflow-x:auto}
+.pnl{width:100%;border-collapse:collapse;font-size:14px;min-width:660px}
+.pnl th{text-align:right;font-size:11.5px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-tertiary);padding:16px;border-bottom:1px solid rgba(0,0,0,.12);white-space:nowrap}
+.pnl th:first-child{text-align:left}
+.pnl td{padding:12px 16px;text-align:right;border-bottom:1px solid rgba(0,0,0,.06);font-variant-numeric:tabular-nums;color:var(--text-secondary);white-space:nowrap}
+.pnl td:first-child{text-align:left;color:var(--text-primary)}
+.pnl tr:last-child td{border-bottom:0}
+.pnl tr.cross td{background:var(--blue-gray)}
+.pnl tr.cross td:first-child{font-weight:500;color:var(--blue-bright)}
+.neg{color:var(--accent-red)}
 
 /* ---------- Что учтено ---------- */
 .incl{padding:56px 0}
@@ -223,75 +287,247 @@ select:focus,input:focus{border-color:var(--blue-bright);outline:none}
 <section class="calc-sec" id="calc">
   <div class="wrap">
     <div class="sec-head">
-      <h2 class="h2">Параметры проекта</h2>
-      <p class="lead">Задайте мощность и условия площадки — расчёт пересчитывается сразу, без кнопки.</p>
+      <h2 class="h2">Калькулятор</h2>
+      <p class="lead">Три варианта одного расчёта — от быстрой оценки до инвестиционной модели. Переключите, чтобы сравнить глубину и формат.</p>
     </div>
 
-    <div class="calc">
+    <div class="vtabs" role="tablist" aria-label="Варианты калькулятора">
+      <button class="vtab" type="button" role="tab" aria-selected="true" data-v="a">
+        <span class="vtab-l">Вариант А</span>
+        <span class="vtab-n">Экспресс</span>
+        <span class="vtab-d">Три поля и порядок цифр. Встроенный блок внутри страницы услуги.</span>
+      </button>
+      <button class="vtab" type="button" role="tab" aria-selected="false" data-v="b">
+        <span class="vtab-l">Вариант Б</span>
+        <span class="vtab-n">Мастер</span>
+        <span class="vtab-d">Четыре шага, смета по статьям, эксплуатация и срок окупаемости.</span>
+      </button>
+      <button class="vtab" type="button" role="tab" aria-selected="false" data-v="c">
+        <span class="vtab-l">Вариант В</span>
+        <span class="vtab-n">Инвест-модель</span>
+        <span class="vtab-d">Модель на десять лет, доходность, график потока, режим «для себя».</span>
+      </button>
+    </div>
+
+    <!-- ВАРИАНТ А -->
+    <div class="vpane" id="pane-a" role="tabpanel">
       <div class="panel">
-        <div class="panel-t">Исходные данные</div>
-
-        <div class="field">
-          <label class="label" for="mw">Мощность IT-нагрузки <em id="mw-v">2 МВт</em></label>
-          <input type="range" id="mw" min="0.25" max="20" step="0.25" value="2">
-          <div class="hint">Полезная мощность оборудования заказчика без учёта охлаждения и потерь.</div>
-        </div>
-
-        <div class="field">
-          <label class="label" for="kw">Мощность на стойку <em id="kw-v">5 кВт</em></label>
-          <input type="range" id="kw" min="3" max="20" step="0.5" value="5">
-          <div class="hint">Классическое размещение — 5 кВт. Под нагрузки искусственного интеллекта закладывают 15–20 кВт и жидкостное охлаждение.</div>
-        </div>
-
-        <div class="field">
-          <span class="label">Уровень надёжности</span>
-          <div class="seg" id="tier">
-            <button type="button" data-k="t2" aria-pressed="false">Tier II</button>
-            <button type="button" data-k="t3" aria-pressed="true">Tier III</button>
-            <button type="button" data-k="t3c" aria-pressed="false">Tier III + сертификат</button>
+        <div class="panel-t">Быстрая оценка</div>
+        <div class="quick">
+          <div class="field">
+            <label class="label" for="a-mw">Мощность IT-нагрузки <em id="a-mw-v">1,5 МВт</em></label>
+            <input type="range" id="a-mw" min="0.25" max="10" step="0.25" value="1.5">
           </div>
-          <div class="hint" id="tier-hint"></div>
-        </div>
-
-        <div class="field">
-          <label class="label" for="reg">Площадка</label>
-          <select id="reg">
-            <option value="msk">Москва</option>
-            <option value="mo">Московская область</option>
-            <option value="spb">Санкт-Петербург</option>
-            <option value="ekb">Екатеринбург</option>
-            <option value="oth">Другой регион</option>
-          </select>
-          <div class="hint" id="reg-hint"></div>
-        </div>
-
-        <div class="field">
-          <span class="label">Тип объекта</span>
-          <div class="seg" id="build">
-            <button type="button" data-k="new" aria-pressed="true">Новое строительство</button>
-            <button type="button" data-k="recon" aria-pressed="false">Реконструкция здания</button>
+          <div class="field">
+            <span class="label">Уровень надёжности</span>
+            <div class="seg" id="a-tier">
+              <button type="button" data-k="t2" aria-pressed="false">Tier II</button>
+              <button type="button" data-k="t3" aria-pressed="true">Tier III</button>
+            </div>
           </div>
+          <div class="field">
+            <label class="label" for="a-reg">Площадка</label>
+            <select id="a-reg">
+              <option value="msk">Москва</option>
+              <option value="mo">Московская область</option>
+              <option value="spb">Санкт-Петербург</option>
+              <option value="ekb">Екатеринбург</option>
+              <option value="oth">Другой регион</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="aline">
+          <div>
+            <div class="res-lab" style="color:var(--text-tertiary)">Капитальные затраты, диапазон</div>
+            <div class="aline-big" id="a-capex">—</div>
+          </div>
+          <div class="aline-kpis">
+            <div class="aline-kpi"><b id="a-racks">—</b><span>стоек по 5 кВт</span></div>
+            <div class="aline-kpi"><b id="a-pue">—</b><span>расчётный PUE</span></div>
+            <div class="aline-kpi"><b id="a-pb">—</b><span>окупаемость</span></div>
+          </div>
+        </div>
+        <p class="disclaim">Оценка по трём параметрам с точностью до порядка величин. Развёрнутый расчёт со сметой по статьям — в варианте «Мастер».</p>
+      </div>
+    </div>
+
+    <!-- ВАРИАНТ Б -->
+    <div class="vpane" id="pane-b" role="tabpanel" hidden>
+      <div class="panel">
+        <div class="steps" id="b-steps">
+          <div class="step on"><div class="step-n">Шаг 1</div><div class="step-t">Мощность и стойки</div></div>
+          <div class="step"><div class="step-n">Шаг 2</div><div class="step-t">Надёжность</div></div>
+          <div class="step"><div class="step-n">Шаг 3</div><div class="step-t">Площадка</div></div>
+          <div class="step"><div class="step-n">Шаг 4</div><div class="step-t">Результат</div></div>
+        </div>
+
+        <div id="b-s1">
+          <div class="field">
+            <label class="label" for="b-mw">Мощность IT-нагрузки <em id="b-mw-v">2 МВт</em></label>
+            <input type="range" id="b-mw" min="0.25" max="20" step="0.25" value="2">
+            <div class="hint">Полезная мощность оборудования без учёта охлаждения и потерь.</div>
+          </div>
+          <div class="field">
+            <label class="label" for="b-kw">Мощность на стойку <em id="b-kw-v">5 кВт</em></label>
+            <input type="range" id="b-kw" min="3" max="20" step="0.5" value="5">
+            <div class="hint">Классическое размещение — 5 кВт. Под нагрузки искусственного интеллекта закладывают 15–20 кВт и жидкостное охлаждение.</div>
+          </div>
+        </div>
+
+        <div id="b-s2" hidden>
+          <div class="field">
+            <span class="label">Уровень надёжности</span>
+            <div class="seg" id="b-tier">
+              <button type="button" data-k="t2" aria-pressed="false">Tier II</button>
+              <button type="button" data-k="t3" aria-pressed="true">Tier III</button>
+              <button type="button" data-k="t3c" aria-pressed="false">Tier III + сертификат</button>
+            </div>
+            <div class="hint" id="b-tier-hint"></div>
+          </div>
+        </div>
+
+        <div id="b-s3" hidden>
+          <div class="field">
+            <label class="label" for="b-reg">Площадка</label>
+            <select id="b-reg">
+              <option value="msk">Москва</option>
+              <option value="mo">Московская область</option>
+              <option value="spb">Санкт-Петербург</option>
+              <option value="ekb">Екатеринбург</option>
+              <option value="oth">Другой регион</option>
+            </select>
+            <div class="hint" id="b-reg-hint"></div>
+          </div>
+          <div class="field">
+            <span class="label">Тип объекта</span>
+            <div class="seg" id="b-build">
+              <button type="button" data-k="new" aria-pressed="true">Новое строительство</button>
+              <button type="button" data-k="recon" aria-pressed="false">Реконструкция здания</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="b-s4" hidden>
+          <div class="res">
+            <div class="res-top">
+              <div class="res-lab">Капитальные затраты «под ключ»</div>
+              <div class="res-big" id="b-capex">—</div>
+              <div class="res-sub" id="b-perkw">—</div>
+            </div>
+            <div class="res-kpis">
+              <div class="res-kpi"><b id="b-racks">—</b><span>стоек</span></div>
+              <div class="res-kpi"><b id="b-pue">—</b><span>расчётный PUE</span></div>
+              <div class="res-kpi"><b id="b-opex">—</b><span>эксплуатация в год</span></div>
+              <div class="res-kpi"><b id="b-pb">—</b><span>окупаемость</span></div>
+            </div>
+            <div class="split">
+              <div class="split-t">Структура капитальных затрат</div>
+              <div id="b-split"></div>
+              <p class="disclaim">Срок окупаемости простой, по EBITDA коммерческой модели, без учёта налогов, амортизации и стоимости финансирования.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="wiz-nav">
+          <button class="secondary-btn" type="button" id="b-prev">Назад</button>
+          <button class="primary-btn" type="button" id="b-next">Дальше</button>
         </div>
       </div>
+    </div>
 
-      <div>
-        <div class="res">
-          <div class="res-top">
-            <div class="res-lab">Капитальные затраты «под ключ»</div>
-            <div class="res-big" id="capex">—</div>
-            <div class="res-sub" id="perkw">—</div>
+    <!-- ВАРИАНТ В -->
+    <div class="vpane" id="pane-c" role="tabpanel" hidden>
+      <div class="lab">
+        <div class="panel">
+          <div class="panel-t">Параметры проекта</div>
+          <div class="field">
+            <span class="label">Модель объекта</span>
+            <div class="seg" id="c-model">
+              <button type="button" data-k="colo" aria-pressed="true">Коммерческий</button>
+              <button type="button" data-k="corp" aria-pressed="false">Для себя</button>
+            </div>
           </div>
-          <div class="res-kpis">
-            <div class="res-kpi"><b id="racks">—</b><span>стоек</span></div>
-            <div class="res-kpi"><b id="pue">—</b><span>расчётный PUE</span></div>
-            <div class="res-kpi"><b id="opex">—</b><span>эксплуатация в год</span></div>
-            <div class="res-kpi"><b id="pb">—</b><span>окупаемость</span></div>
+          <div class="field">
+            <label class="label" for="c-mw">Мощность IT <em id="c-mw-v">3 МВт</em></label>
+            <input type="range" id="c-mw" min="0.25" max="30" step="0.25" value="3">
           </div>
-          <div class="split">
-            <div class="split-t">Структура капитальных затрат</div>
-            <div id="split"></div>
-            <p class="disclaim">Расчёт предварительный, для оценки порядка величин. Срок окупаемости — простой, по EBITDA коммерческой модели, без учёта налогов, амортизации и стоимости финансирования. Точная финансовая модель разрабатывается под конкретный проект.</p>
+          <div class="field">
+            <label class="label" for="c-kw">Мощность на стойку <em id="c-kw-v">5 кВт</em></label>
+            <input type="range" id="c-kw" min="3" max="20" step="0.5" value="5">
           </div>
+          <div class="field">
+            <span class="label">Уровень надёжности</span>
+            <div class="seg" id="c-tier">
+              <button type="button" data-k="t2" aria-pressed="false">Tier II</button>
+              <button type="button" data-k="t3" aria-pressed="true">Tier III</button>
+              <button type="button" data-k="t3c" aria-pressed="false">III + серт.</button>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="c-reg">Площадка</label>
+            <select id="c-reg">
+              <option value="msk">Москва</option>
+              <option value="mo">Московская область</option>
+              <option value="spb">Санкт-Петербург</option>
+              <option value="ekb">Екатеринбург</option>
+              <option value="oth">Другой регион</option>
+            </select>
+          </div>
+          <div class="field">
+            <span class="label">Тип объекта</span>
+            <div class="seg" id="c-build">
+              <button type="button" data-k="new" aria-pressed="true">Новое</button>
+              <button type="button" data-k="recon" aria-pressed="false">Реконструкция</button>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="c-load">Целевая загрузка <em id="c-load-v">88 %</em></label>
+            <input type="range" id="c-load" min="40" max="95" step="1" value="88">
+          </div>
+          <div class="field">
+            <label class="label" for="c-tar">Тариф на электроэнергию <em id="c-tar-v">7,40 ₽</em></label>
+            <input type="range" id="c-tar" min="3" max="12" step="0.1" value="7.4">
+          </div>
+          <div class="field" id="c-rate-wrap">
+            <label class="label" for="c-rate">Ставка за стойку в месяц <em id="c-rate-v">135 000 ₽</em></label>
+            <input type="range" id="c-rate" min="40000" max="320000" step="1000" value="135000">
+          </div>
+        </div>
+
+        <div>
+          <div class="res">
+            <div class="res-top">
+              <div class="res-lab">Капитальные затраты «под ключ»</div>
+              <div class="res-big" id="c-capex">—</div>
+              <div class="res-sub" id="c-perkw">—</div>
+            </div>
+            <div class="res-kpis">
+              <div class="res-kpi"><b id="c-racks">—</b><span>стоек</span></div>
+              <div class="res-kpi"><b id="c-k2">—</b><span id="c-k2l">EBITDA, год 4</span></div>
+              <div class="res-kpi"><b id="c-k3">—</b><span id="c-k3l">окупаемость</span></div>
+              <div class="res-kpi"><b id="c-k4">—</b><span id="c-k4l">доходность за 10 лет</span></div>
+            </div>
+          </div>
+
+          <div class="blk-t" id="c-chart-t">Накопленный денежный поток против капитальных затрат</div>
+          <div class="chart">
+            <svg id="c-chart" viewBox="0 0 640 260" role="img" aria-label="График накопленного денежного потока по годам"></svg>
+            <div class="chart-legend">
+              <span><i style="background:#C7D4D8"></i>до окупаемости</span>
+              <span><i style="background:var(--blue-bright)"></i>после окупаемости</span>
+              <span><i style="background:var(--red);height:3px;border-radius:0"></i>уровень капитальных затрат</span>
+            </div>
+          </div>
+
+          <div class="blk-t">Структура капитальных затрат</div>
+          <div class="panel" style="padding:24px">
+            <div id="c-split"></div>
+          </div>
+
+          <div class="blk-t" id="c-pnl-t">Модель по годам</div>
+          <div class="pnl-wrap"><table class="pnl" id="c-pnl"></table></div>
+          <p class="disclaim">Срок окупаемости простой, по EBITDA, без учёта налогов, амортизации и стоимости финансирования. Доходность — внутренняя норма на горизонте десяти лет.</p>
         </div>
       </div>
     </div>
@@ -437,61 +673,214 @@ function seg(el,cb){
   });
 }
 
-function render(){
-  var mw=parseFloat($("mw").value), kwR=parseFloat($("kw").value);
-  var tier=segVal($("tier")), reg=$("reg").value, build=segVal($("build"));
-  $("mw-v").textContent=mw.toLocaleString("ru-RU",{maximumFractionDigits:2})+" МВт";
-  $("kw-v").textContent=kwR.toLocaleString("ru-RU",{maximumFractionDigits:1})+" кВт";
-  $("tier-hint").textContent=TIERHINT[tier];
-  var rg=REG[reg];
-  $("reg-hint").textContent="Тариф "+nf(rg.tar,2)+" ₽ за кВт·ч, ставка "+nf(rg.rate)+" ₽ за стойку 5 кВт в месяц.";
-
-  var kw=mw*1000;
-  var capex=kw*BASE[tier]*rg.k*BUILD[build];
-  var pue=Math.max(1.25,PUE[tier]+rg.pa);
-  var racks=Math.round(kw/kwR);
-  var load=0.88;
-  var elec=kw*load*pue*8760*rg.tar;
-  var staff=(6+7*mw)*2100000;
-  var maint=capex*0.52*0.035;
-  var other=capex*0.018;
-  var opex=elec+staff+maint+other;
-  var rev=racks*load*(rg.rate*(kwR/5))*12*1.14;
-  var eb=rev-opex;
-
-  var ramp=[0.30,0.60,0.80], cum=0, pb=null;
-  for(var y=1;y<=15;y++){
-    var l=(y<=3)?ramp[y-1]:load;
-    var e=kw*l*pue*8760*rg.tar;
-    var o=e+staff+maint+other;
-    var r=racks*l*(rg.rate*(kwR/5))*12*1.14;
-    var v=r-o, prev=cum; cum+=v;
-    if(pb===null&&cum>=capex&&v>0){pb=y-1+(capex-prev)/v;break;}
+/* ---------- Общее расчётное ядро ---------- */
+function calc(p){
+  var kw=p.mw*1000, rg=REG[p.reg];
+  var capex=kw*BASE[p.tier]*rg.k*BUILD[p.build];
+  var pue=Math.max(1.25,PUE[p.tier]+rg.pa);
+  var racks=Math.round(kw/p.kw);
+  var tar=(p.tar!=null)?p.tar:rg.tar;
+  var rate=(p.rate!=null)?p.rate:rg.rate*(p.kw/5);
+  var target=(p.load!=null)?p.load:0.88;
+  var ramp=[0.30,0.60,0.80];
+  var staff=(6+7*p.mw)*2100000, maint=capex*0.52*0.035, other=capex*0.018;
+  var years=[],cum=0,pb=null;
+  for(var y=1;y<=10;y++){
+    var load=(y<=3)?Math.min(ramp[y-1],target):target;
+    var elec=kw*load*pue*8760*tar;
+    var opex=elec+staff+maint+other;
+    var rev=(p.model==="corp")?0:racks*load*rate*12*1.14;
+    var eb=rev-opex, prev=cum; cum+=eb;
+    if(pb===null&&p.model!=="corp"&&cum>=capex&&eb>0)pb=y-1+(capex-prev)/eb;
+    years.push({y:y,load:load,elec:elec,opex:opex,rev:rev,eb:eb,cum:cum,staff:staff,maint:maint,other:other});
   }
-
-  $("capex").textContent=rub(capex);
-  $("perkw").textContent=nf(Math.round(capex/kw/1000)*1000)+" ₽ за кВт полезной мощности";
-  $("racks").textContent=nf(racks);
-  $("pue").textContent=nf(pue,2);
-  $("opex").textContent=short(opex)+" ₽";
-  $("pb").textContent=(eb>0&&pb)?yrs(pb):"—";
-
+  var st=years[3], irr=null, tco=null;
+  if(p.model!=="corp"){
+    var cf=[-capex];for(var i=0;i<10;i++)cf.push(years[i].eb);
+    irr=calcIRR(cf);
+  }else{
+    var o=st.opex+capex/10;
+    tco={year:o,perRack:o/12/racks};
+  }
+  return {capex:capex,pue:pue,racks:racks,years:years,stable:st,pb:pb,irr:irr,tco:tco,perKw:capex/kw};
+}
+function npvAt(cf,r){var s=0;for(var t=0;t<cf.length;t++)s+=cf[t]/Math.pow(1+r,t);return s;}
+function calcIRR(cf){
+  if(npvAt(cf,0)<=0)return null;
+  var lo=0,hi=2;
+  if(npvAt(cf,hi)>0)return null;
+  for(var i=0;i<160;i++){var m=(lo+hi)/2;if(npvAt(cf,m)>0)lo=m;else hi=m;}
+  return (lo+hi)/2;
+}
+function splitHTML(capex){
   var h="";
   for(var i=0;i<SHARE.length;i++){
     h+='<div class="srow"><div class="srow-n">'+SHARE[i][0]+'</div>'+
        '<div class="srow-v">'+short(capex*SHARE[i][1])+' ₽</div>'+
        '<div class="srow-bar"><i style="width:'+(SHARE[i][1]/0.31*100).toFixed(1)+'%"></i></div></div>';
   }
-  $("split").innerHTML=h;
+  return h;
+}
+function regHint(reg){
+  var rg=REG[reg];
+  return "Тариф "+nf(rg.tar,2)+" ₽ за кВт·ч, ставка "+nf(rg.rate)+" ₽ за стойку 5 кВт в месяц.";
 }
 
-$("mw").addEventListener("input",render);
-$("kw").addEventListener("input",render);
-$("reg").addEventListener("change",render);
-seg($("tier"),render);
-seg($("build"),render);
+/* ---------- Вариант А ---------- */
+function renderA(){
+  var mw=parseFloat($("a-mw").value);
+  $("a-mw-v").textContent=mw.toLocaleString("ru-RU",{maximumFractionDigits:2})+" МВт";
+  var r=calc({mw:mw,kw:5,tier:segVal($("a-tier")),reg:$("a-reg").value,build:"new",model:"colo"});
+  $("a-capex").textContent=short(r.capex*0.88)+" – "+rub(r.capex*1.12);
+  $("a-racks").textContent=nf(r.racks);
+  $("a-pue").textContent=nf(r.pue,2);
+  $("a-pb").textContent=r.pb?yrs(r.pb):"—";
+}
+
+/* ---------- Вариант Б ---------- */
+var bStep=1;
+function bShow(){
+  for(var i=1;i<=4;i++)$("b-s"+i).hidden=(i!==bStep);
+  var st=$("b-steps").children;
+  for(var j=0;j<4;j++)st[j].className="step"+(j+1===bStep?" on":"")+(j+1<bStep?" done":"");
+  $("b-prev").style.visibility=(bStep===1)?"hidden":"visible";
+  $("b-next").textContent=(bStep===4)?"Начать заново":"Дальше";
+}
+function renderB(){
+  var mw=parseFloat($("b-mw").value), kwR=parseFloat($("b-kw").value);
+  $("b-mw-v").textContent=mw.toLocaleString("ru-RU",{maximumFractionDigits:2})+" МВт";
+  $("b-kw-v").textContent=kwR.toLocaleString("ru-RU",{maximumFractionDigits:1})+" кВт";
+  $("b-tier-hint").textContent=TIERHINT[segVal($("b-tier"))];
+  $("b-reg-hint").textContent=regHint($("b-reg").value);
+  var r=calc({mw:mw,kw:kwR,tier:segVal($("b-tier")),reg:$("b-reg").value,build:segVal($("b-build")),model:"colo"});
+  $("b-capex").textContent=rub(r.capex);
+  $("b-perkw").textContent=nf(Math.round(r.perKw/1000)*1000)+" ₽ за кВт полезной мощности";
+  $("b-racks").textContent=nf(r.racks);
+  $("b-pue").textContent=nf(r.pue,2);
+  $("b-opex").textContent=short(r.stable.opex)+" ₽";
+  $("b-pb").textContent=r.pb?yrs(r.pb):"—";
+  $("b-split").innerHTML=splitHTML(r.capex);
+}
+
+/* ---------- Вариант В ---------- */
+var cTar=false,cRate=false;
+function renderC(){
+  var mw=parseFloat($("c-mw").value), kwR=parseFloat($("c-kw").value);
+  var corp=(segVal($("c-model"))==="corp");
+  $("c-mw-v").textContent=mw.toLocaleString("ru-RU",{maximumFractionDigits:2})+" МВт";
+  $("c-kw-v").textContent=kwR.toLocaleString("ru-RU",{maximumFractionDigits:1})+" кВт";
+  $("c-load-v").textContent=$("c-load").value+" %";
+  $("c-tar-v").textContent=nf(parseFloat($("c-tar").value),2)+" ₽";
+  $("c-rate-v").textContent=nf(parseFloat($("c-rate").value))+" ₽";
+  $("c-rate-wrap").hidden=corp;
+
+  var r=calc({mw:mw,kw:kwR,tier:segVal($("c-tier")),reg:$("c-reg").value,build:segVal($("c-build")),
+              model:corp?"corp":"colo",load:parseFloat($("c-load").value)/100,
+              tar:parseFloat($("c-tar").value),rate:parseFloat($("c-rate").value)*(kwR/5)});
+
+  $("c-capex").textContent=rub(r.capex);
+  $("c-perkw").textContent=nf(Math.round(r.perKw/1000)*1000)+" ₽ за кВт · PUE "+nf(r.pue,2);
+  $("c-racks").textContent=nf(r.racks);
+
+  if(corp){
+    $("c-k2").textContent=short(r.tco.year)+" ₽"; $("c-k2l").textContent="владение в год";
+    $("c-k3").textContent=nf(Math.round(r.tco.perRack/1000)*1000)+" ₽"; $("c-k3l").textContent="на стойку в месяц";
+    $("c-k4").textContent=short(r.stable.elec)+" ₽"; $("c-k4l").textContent="электроэнергия в год";
+    $("c-chart-t").textContent="Накопленные расходы на владение";
+    $("c-pnl-t").textContent="Эксплуатационные расходы по годам";
+  }else{
+    $("c-k2").textContent=short(r.stable.eb)+" ₽"; $("c-k2l").textContent="EBITDA, год 4";
+    $("c-k3").textContent=r.pb?yrs(r.pb):"—"; $("c-k3l").textContent="окупаемость";
+    $("c-k4").textContent=r.irr?nf(r.irr*100,1)+" %":"—"; $("c-k4l").textContent="доходность за 10 лет";
+    $("c-chart-t").textContent="Накопленный денежный поток против капитальных затрат";
+    $("c-pnl-t").textContent="Модель по годам";
+  }
+
+  $("c-split").innerHTML=splitHTML(r.capex);
+
+  var t="";
+  if(corp){
+    t="<thead><tr><th>Год</th><th>Загрузка</th><th>Электроэнергия</th><th>Прочий OPEX</th><th>Итого</th></tr></thead><tbody>";
+    for(var y=0;y<10;y++){var v=r.years[y];
+      t+="<tr><td>Год "+v.y+"</td><td>"+Math.round(v.load*100)+" %</td><td>"+short(v.elec)+"</td><td>"+short(v.staff+v.maint+v.other)+"</td><td>"+short(v.opex)+"</td></tr>";}
+  }else{
+    t="<thead><tr><th>Год</th><th>Загрузка</th><th>Выручка</th><th>OPEX</th><th>EBITDA</th><th>Накопленный поток</th></tr></thead><tbody>";
+    var crossed=false;
+    for(var z=0;z<10;z++){var w=r.years[z];
+      var isCross=(!crossed&&w.cum>=r.capex); if(isCross)crossed=true;
+      t+="<tr"+(isCross?" class='cross'":"")+"><td>Год "+w.y+"</td><td>"+Math.round(w.load*100)+" %</td><td>"+short(w.rev)+"</td><td>"+short(w.opex)+"</td><td"+(w.eb<0?" class='neg'":"")+">"+short(w.eb)+"</td><td>"+short(w.cum)+"</td></tr>";}
+  }
+  $("c-pnl").innerHTML=t+"</tbody>";
+  chart(r,corp);
+}
+
+function chart(r,corp){
+  var W=640,H=260,L=72,R=14,T=18,B=32;
+  var iw=W-L-R, ih=H-T-B;
+  var vals=[],run=0;
+  for(var i=0;i<10;i++){
+    if(corp){run+=r.years[i].opex;vals.push(run);} else vals.push(r.years[i].cum);
+  }
+  var maxV=Math.max(r.capex,Math.max.apply(null,vals.map(Math.abs)))*1.12;
+  var gap=iw/10, bw=gap*0.6, s="";
+  for(var g=0;g<=4;g++){
+    var gy=T+ih-ih*(g/4);
+    s+='<line class="cx-grid" x1="'+L+'" y1="'+gy.toFixed(1)+'" x2="'+(W-R)+'" y2="'+gy.toFixed(1)+'"/>';
+    s+='<text class="cx-t r" x="'+(L-9)+'" y="'+(gy+3.5).toFixed(1)+'">'+short(maxV*(g/4))+'</text>';
+  }
+  for(var j=0;j<10;j++){
+    var v=Math.abs(vals[j]);
+    var bh=Math.max(1,ih*(v/maxV));
+    var x=L+gap*j+(gap-bw)/2, y=T+ih-bh;
+    var on=(!corp&&r.years[j].cum>=r.capex);
+    s+='<rect class="cx-bar'+(on?" on":"")+'" x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+bh.toFixed(1)+'" rx="2"/>';
+    s+='<text class="cx-t c" x="'+(x+bw/2).toFixed(1)+'" y="'+(H-B+16)+'">'+(j+1)+'</text>';
+  }
+  var cy=T+ih-ih*(r.capex/maxV);
+  s+='<line class="cx-cap" x1="'+L+'" y1="'+cy.toFixed(1)+'" x2="'+(W-R)+'" y2="'+cy.toFixed(1)+'"/>';
+  s+='<text class="cx-lab" x="'+(L+5)+'" y="'+(cy-6).toFixed(1)+'">Капитальные затраты '+short(r.capex)+' ₽</text>';
+  s+='<line class="cx-axis" x1="'+L+'" y1="'+(T+ih)+'" x2="'+(W-R)+'" y2="'+(T+ih)+'"/>';
+  s+='<text class="cx-t c" x="'+(L+iw/2)+'" y="'+(H-3)+'">год эксплуатации</text>';
+  $("c-chart").innerHTML=s;
+}
+
+/* ---------- Переключение вариантов ---------- */
+var panes={a:$("pane-a"),b:$("pane-b"),c:$("pane-c")};
+var vtabs=document.querySelectorAll(".vtab");
+for(var t=0;t<vtabs.length;t++){
+  vtabs[t].addEventListener("click",function(){
+    var v=this.getAttribute("data-v");
+    for(var k=0;k<vtabs.length;k++)vtabs[k].setAttribute("aria-selected",vtabs[k]===this?"true":"false");
+    for(var p in panes)panes[p].hidden=(p!==v);
+    if(v==="c")renderC();
+  });
+}
+
+$("a-mw").addEventListener("input",renderA);
+$("a-reg").addEventListener("change",renderA);
+seg($("a-tier"),renderA);
+
+$("b-mw").addEventListener("input",renderB);
+$("b-kw").addEventListener("input",renderB);
+$("b-reg").addEventListener("change",renderB);
+seg($("b-tier"),renderB); seg($("b-build"),renderB);
+$("b-next").addEventListener("click",function(){bStep=(bStep===4)?1:bStep+1;bShow();renderB();});
+$("b-prev").addEventListener("click",function(){if(bStep>1)bStep--;bShow();});
+
+["c-mw","c-kw","c-load"].forEach(function(id){$(id).addEventListener("input",renderC);});
+$("c-tar").addEventListener("input",function(){cTar=true;renderC();});
+$("c-rate").addEventListener("input",function(){cRate=true;renderC();});
+$("c-reg").addEventListener("change",function(){
+  var rg=REG[$("c-reg").value];
+  if(!cTar)$("c-tar").value=rg.tar;
+  if(!cRate)$("c-rate").value=rg.rate;
+  renderC();
+});
+seg($("c-tier"),renderC); seg($("c-build"),renderC); seg($("c-model"),renderC);
+
 $("form").addEventListener("submit",function(e){e.preventDefault();});
-render();
+
+renderA(); bShow(); renderB(); renderC();
 })();
 </script>
 </body>
