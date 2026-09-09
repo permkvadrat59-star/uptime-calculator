@@ -77,7 +77,8 @@ h1,h2,h3,p{margin:0}
 /* ---------- Первый экран ---------- */
 .hero{position:relative;background:var(--blue-dark);color:#fff;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background-image:url("img/hero.webp");background-size:cover;background-position:center;opacity:.42}
-.hero-veil{position:absolute;inset:0;background:linear-gradient(90deg,var(--blue-dark) 0%,rgba(22,29,35,.92) 42%,rgba(22,29,35,.55) 100%)}
+.hero-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,29,35,.92) 0%,rgba(22,29,35,.86) 100%)}
+@media(min-width:1024px){.hero-veil{background:linear-gradient(90deg,var(--blue-dark) 0%,rgba(22,29,35,.92) 42%,rgba(22,29,35,.55) 100%)}}
 .hero-in{position:relative;padding:64px 0 56px}
 @media(min-width:1024px){.hero-in{padding:96px 0 88px}}
 .hero h1{max-width:16ch;color:#fff}
@@ -439,8 +440,8 @@ function seg(el,cb){
 function render(){
   var mw=parseFloat($("mw").value), kwR=parseFloat($("kw").value);
   var tier=segVal($("tier")), reg=$("reg").value, build=segVal($("build"));
-  $("mw-v").textContent=nf(mw,mw%1?2:0)+" МВт";
-  $("kw-v").textContent=nf(kwR,kwR%1?1:0)+" кВт";
+  $("mw-v").textContent=mw.toLocaleString("ru-RU",{maximumFractionDigits:2})+" МВт";
+  $("kw-v").textContent=kwR.toLocaleString("ru-RU",{maximumFractionDigits:1})+" кВт";
   $("tier-hint").textContent=TIERHINT[tier];
   var rg=REG[reg];
   $("reg-hint").textContent="Тариф "+nf(rg.tar,2)+" ₽ за кВт·ч, ставка "+nf(rg.rate)+" ₽ за стойку 5 кВт в месяц.";
